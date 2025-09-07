@@ -173,6 +173,24 @@
             border-color: var(--secondary);
         }
         
+        /* Price Input */
+        .price-input {
+            position: relative;
+        }
+        
+        .price-input::before {
+            content: 'R';
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .price-input input {
+            padding-left: 25px;
+        }
+        
         /* Image Upload */
         .image-upload {
             border: 2px dashed #ddd;
@@ -257,6 +275,10 @@
             color: var(--secondary);
             font-size: 1.2rem;
             margin: 10px 0;
+        }
+        
+        .price::before {
+            content: 'R ';
         }
         
         .product-actions {
@@ -428,9 +450,9 @@
                     <textarea id="productDescription" class="form-control" rows="4" placeholder="Enter product description"></textarea>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group price-input">
                     <label for="productPrice">Price (ZAR)</label>
-                    <input type="number" id="productPrice" class="form-control" placeholder="Enter price in Rands" step="0.01" min="0">
+                    <input type="number" id="productPrice" class="form-control" placeholder="Enter price" step="0.01" min="0">
                 </div>
                 
                 <div class="form-group">
@@ -556,7 +578,7 @@
             // Drag and drop functionality
             imageUpload.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                imageUpload.style.borderColor = var(--secondary);
+                imageUpload.style.borderColor = '#3498db';
                 imageUpload.style.backgroundColor = '#f9f9f9';
             });
             
@@ -749,7 +771,7 @@
                         <span class="product-category">${product.category}</span>
                         <h3>${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="price">${formatPrice(product.price)}</div>
+                        <div class="price">${product.price.toFixed(2)}</div>
                         <div class="product-actions">
                             <button class="action-btn edit-btn" onclick="editProduct(${product.id})">Edit</button>
                             <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
