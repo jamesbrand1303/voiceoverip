@@ -58,6 +58,7 @@
             font-weight: 700;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
         
         .logo i {
@@ -81,17 +82,221 @@
             transition: color 0.3s;
             padding: 5px 10px;
             border-radius: 4px;
+            cursor: pointer;
         }
         
-        nav ul li a:hover {
+        nav ul li a:hover, nav ul li a.active {
             color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Page Sections */
+        .page-section {
+            display: none;
+            padding: 40px 0;
+            min-height: 70vh;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        /* Home Page */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), #2c3e50;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+        
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* Products Page */
+        .category-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        /* Services Page */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* About Page */
+        .about-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        /* Contact Page */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
         }
         
         /* Admin Panel */
-        .admin-panel {
-            padding: 40px 0;
-        }
-        
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -150,27 +355,8 @@
             display: none;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
+        .product-form.active {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
         }
         
         /* Price Input */
@@ -357,6 +543,7 @@
             color: #ddd;
             text-decoration: none;
             transition: color 0.3s;
+            cursor: pointer;
         }
         
         .footer-links a:hover {
@@ -379,6 +566,11 @@
             nav ul {
                 margin-top: 20px;
                 justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px;
             }
             
             .admin-header {
@@ -390,6 +582,14 @@
             .product-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -398,25 +598,216 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
+                <div class="logo" onclick="showPage('home')">
                     <i class="fas fa-shield-alt"></i>
                     TechGuard Solutions
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a class="nav-link active" data-page="home">Home</a></li>
+                        <li><a class="nav-link" data-page="products">Products</a></li>
+                        <li><a class="nav-link" data-page="services">Services</a></li>
+                        <li><a class="nav-link" data-page="about">About</a></li>
+                        <li><a class="nav-link" data-page="contact">Contact</a></li>
+                        <li><a class="nav-link" data-page="admin">Admin</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
+    <!-- Home Page -->
+    <section id="home" class="page-section active">
+        <div class="container">
+            <div class="hero">
+                <h1>Your Complete Security & Technology Solution</h1>
+                <p>High-quality CCTV systems, reliable VoIP services, and efficient solar solutions for your home and business</p>
+                <button class="btn btn-large" onclick="showPage('products')">Explore Products</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📹</div>
+                    <h3>CCTV Security</h3>
+                    <p>Advanced surveillance solutions to protect your property with HD cameras, DVR systems, and remote monitoring.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>VOIP Services</h3>
+                    <p>Reliable VoIP phones, PBX systems, and business communication solutions for enhanced connectivity.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">☀️</div>
+                    <h3>Solar Solutions</h3>
+                    <p>Eco-friendly solar panels, inverters, batteries, and complete installation services to save money.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Page -->
+    <section id="products" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <p>Browse our range of security, communication, and solar solutions</p>
+            
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All Products</button>
+                <button class="filter-btn" data-category="CCTV Security">CCTV Security</button>
+                <button class="filter-btn" data-category="VOIP Services">VOIP Services</button>
+                <button class="filter-btn" data-category="Solar Solutions">Solar Solutions</button>
+            </div>
+            
+            <div class="product-grid">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p>We offer comprehensive solutions for all your security and technology needs</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Installation</h3>
+                    <p>Professional installation services for all our products by certified technicians.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📞</div>
+                    <h3>Technical Support</h3>
+                    <p>24/7 technical support to ensure your systems are always running smoothly.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Consultation</h3>
+                    <p>Free consultation to determine the best solutions for your specific needs.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Maintenance</h3>
+                    <p>Regular maintenance services to keep your systems in optimal condition.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Training</h3>
+                    <p>Comprehensive training for your staff on how to use our systems effectively.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Repairs</h3>
+                    <p>Quick and efficient repair services for all our products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            
+            <div class="about-content">
+                <h3>Our Story</h3>
+                <p>TechGuard Solutions was founded in 2010 with a mission to provide top-quality security and technology solutions to homes and businesses across South Africa. What started as a small operation with just three employees has grown into a trusted provider of CCTV security, VoIP services, and solar solutions.</p>
+                
+                <p>Our team of certified technicians and engineers are dedicated to delivering exceptional products and services that meet the unique needs of each client. We pride ourselves on our commitment to quality, innovation, and customer satisfaction.</p>
+                
+                <h3>Our Team</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-img">CEO</div>
+                        <h4>John Smith</h4>
+                        <p>Founder & CEO</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-img">CTO</div>
+                        <h4>Sarah Johnson</h4>
+                        <p>Chief Technology Officer</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-img">CSM</div>
+                        <h4>Michael Williams</h4>
+                        <p>Customer Success Manager</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <div class="team-img">Tech</div>
+                        <h4>Emily Brown</h4>
+                        <p>Lead Technician</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p>Get in touch with us for inquiries, quotes, or support</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> 123 Tech Street, Johannesburg, South Africa</p>
+                    <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +27 11 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@techguardsolutions.co.za</p>
+                    <p><i class="fas fa-clock"></i> <strong>Business Hours:</strong> Mon-Fri: 8am-6pm, Sat: 9am-1pm</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <h3>Follow Us</h3>
+                        <div style="display: flex; gap: 15px; margin-top: 15px;">
+                            <a href="#" style="color: #3b5998; font-size: 24px;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: #1da1f2; font-size: 24px;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: #0077b5; font-size: 24px;"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" style="color: #e4405f; font-size: 24px;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" placeholder="Enter subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Enter your message"></textarea>
+                    </div>
+                    
+                    <button class="btn">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Admin Panel -->
-    <section class="admin-panel">
+    <section id="admin" class="page-section">
         <div class="container">
             <div class="admin-header">
                 <h2>Product Management</h2>
@@ -463,7 +854,7 @@
                         <p style="font-size: 12px; color: #999;">PNG, JPG, GIF up to 5MB</p>
                         <img id="imagePreview" class="image-preview" alt="Image preview">
                     </div>
-                    <input type="file" id="productImage" accept="image/*" style="display: none;">
+                    <input type="file" id="productImageInput" accept="image/*" style="display: none;">
                     <input type="hidden" id="imageData">
                 </div>
                 
@@ -475,7 +866,7 @@
             </div>
 
             <!-- Product Grid -->
-            <div class="product-grid" id="productGrid">
+            <div class="product-grid" id="adminProductGrid">
                 <!-- Products will be dynamically added here -->
             </div>
         </div>
@@ -493,19 +884,19 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a onclick="showPage('home')">Home</a></li>
+                        <li><a onclick="showPage('products')">Products</a></li>
+                        <li><a onclick="showPage('services')">Services</a></li>
+                        <li><a onclick="showPage('about')">About Us</a></li>
+                        <li><a onclick="showPage('contact')">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</p>
-                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                    <p><i class="fas fa-envelope"></i> info@techguardsolutions.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Johannesburg, South Africa</p>
+                    <p><i class="fas fa-phone"></i> +27 11 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> info@techguardsolutions.co.za</p>
                 </div>
             </div>
             
@@ -541,11 +932,36 @@
                 description: "300W complete solar panel kit for home use",
                 price: 8999.99,
                 image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "8 Channel DVR System",
+                category: "CCTV Security",
+                description: "Complete surveillance system with 8 cameras and recorder",
+                price: 7599.99,
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "IP PBX System",
+                category: "VOIP Services",
+                description: "Enterprise-grade IP PBX system for business communications",
+                price: 12599.99,
+                image: "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Solar Inverter",
+                category: "Solar Solutions",
+                description: "High-capacity solar inverter for home energy systems",
+                price: 11299.99,
+                image: "https://images.unsplash.com/photo-1620781152419-70bd272ceb4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
             }
         ];
 
         // DOM Elements
         const productForm = document.getElementById('productForm');
+        const adminProductGrid = document.getElementById('adminProductGrid');
         const productGrid = document.getElementById('productGrid');
         const toggleFormBtn = document.getElementById('toggleForm');
         const saveProductBtn = document.getElementById('saveProduct');
@@ -554,213 +970,85 @@
         const formTitle = document.getElementById('formTitle');
         const editIdInput = document.getElementById('editId');
         const imageUpload = document.getElementById('imageUpload');
-        const productImage = document.getElementById('productImage');
+        const productImageInput = document.getElementById('productImageInput');
         const imagePreview = document.getElementById('imagePreview');
         const imageData = document.getElementById('imageData');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const filterBtns = document.querySelectorAll('.filter-btn');
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
+            renderAdminProducts();
             loadFromLocalStorage();
             setupImageUpload();
-        });
-
-        // Set up image upload functionality
-        function setupImageUpload() {
-            // Click on upload area to trigger file input
-            imageUpload.addEventListener('click', () => {
-                productImage.click();
-            });
             
-            // Handle file selection
-            productImage.addEventListener('change', handleImageUpload);
-            
-            // Drag and drop functionality
-            imageUpload.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                imageUpload.style.borderColor = '#3498db';
-                imageUpload.style.backgroundColor = '#f9f9f9';
-            });
-            
-            imageUpload.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                imageUpload.style.borderColor = '#ddd';
-                imageUpload.style.backgroundColor = 'transparent';
-            });
-            
-            imageUpload.addEventListener('drop', (e) => {
-                e.preventDefault();
-                imageUpload.style.borderColor = '#ddd';
-                imageUpload.style.backgroundColor = 'transparent';
-                
-                if (e.dataTransfer.files.length) {
-                    productImage.files = e.dataTransfer.files;
-                    handleImageUpload();
-                }
-            });
-        }
-        
-        // Handle image upload and preview
-        function handleImageUpload() {
-            const file = productImage.files[0];
-            
-            if (file) {
-                // Check if the file is an image
-                if (!file.type.match('image.*')) {
-                    alert('Please select an image file');
-                    return;
-                }
-                
-                // Check file size (max 5MB)
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('Image must be less than 5MB');
-                    return;
-                }
-                
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                    imageData.value = e.target.result; // Store base64 data
-                    
-                    // Hide upload text when image is selected
-                    const uploadText = imageUpload.querySelector('p');
-                    if (uploadText) uploadText.style.display = 'none';
-                    const uploadIcon = imageUpload.querySelector('i');
-                    if (uploadIcon) uploadIcon.style.display = 'none';
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Toggle product form
-        toggleFormBtn.addEventListener('click', () => {
-            resetForm();
-            productForm.style.display = productForm.style.display === 'block' ? 'none' : 'block';
-        });
-
-        // Cancel edit
-        cancelEditBtn.addEventListener('click', () => {
-            productForm.style.display = 'none';
-            resetForm();
-        });
-
-        // Save product
-        saveProductBtn.addEventListener('click', () => {
-            const name = document.getElementById('productName').value;
-            const category = document.getElementById('productCategory').value;
-            const description = document.getElementById('productDescription').value;
-            const price = parseFloat(document.getElementById('productPrice').value);
-            const image = imageData.value || document.getElementById('productImage').value;
-            const editId = editIdInput.value;
-
-            if (!name || !category || !description || !price) {
-                alert('Please fill in all required fields');
-                return;
-            }
-
-            if (editId) {
-                // Update existing product
-                const index = products.findIndex(p => p.id == editId);
-                if (index !== -1) {
-                    products[index] = { 
-                        id: parseInt(editId), 
-                        name, 
-                        category, 
-                        description, 
-                        price, 
-                        image 
-                    };
-                }
-            } else {
-                // Add new product
-                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-                products.push({
-                    id: newId,
-                    name,
-                    category,
-                    description,
-                    price,
-                    image: image || 'https://via.placeholder.com/300x200?text=No+Image'
+            // Set up navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    showPage(page);
                 });
-            }
-
-            renderProducts();
-            saveToLocalStorage();
-            productForm.style.display = 'none';
-            resetForm();
-        });
-
-        // Save all changes
-        saveAllBtn.addEventListener('click', () => {
-            saveToLocalStorage();
-            alert('All changes saved successfully!');
-        });
-
-        // Edit product
-        function editProduct(id) {
-            const product = products.find(p => p.id === id);
-            if (product) {
-                document.getElementById('productName').value = product.name;
-                document.getElementById('productCategory').value = product.category;
-                document.getElementById('productDescription').value = product.description;
-                document.getElementById('productPrice').value = product.price;
-                
-                // Handle image
-                if (product.image.startsWith('data:image') || product.image.startsWith('blob:')) {
-                    imagePreview.src = product.image;
-                    imagePreview.style.display = 'block';
-                    imageData.value = product.image;
-                    // Hide upload text when image is selected
-                    const uploadText = imageUpload.querySelector('p');
-                    if (uploadText) uploadText.style.display = 'none';
-                    const uploadIcon = imageUpload.querySelector('i');
-                    if (uploadIcon) uploadIcon.style.display = 'none';
-                } else {
-                    imagePreview.src = product.image;
-                    imagePreview.style.display = 'block';
-                    imageData.value = '';
-                    // Hide upload text when image is selected
-                    const uploadText = imageUpload.querySelector('p');
-                    if (uploadText) uploadText.style.display = 'none';
-                    const uploadIcon = imageUpload.querySelector('i');
-                    if (uploadIcon) uploadIcon.style.display = 'none';
-                }
-                
-                editIdInput.value = product.id;
-                
-                formTitle.textContent = 'Edit Product';
-                productForm.style.display = 'block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        // Delete product
-        function deleteProduct(id) {
-            if (confirm('Are you sure you want to delete this product?')) {
-                products = products.filter(p => p.id !== id);
-                renderProducts();
-                saveToLocalStorage();
-            }
-        }
-
-        // Format price as South African Rand
-        function formatPrice(price) {
-            return 'R ' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-        }
-
-        // Render products
-        function renderProducts() {
-            productGrid.innerHTML = '';
+            });
             
-            if (products.length === 0) {
-                productGrid.innerHTML = '<p>No products found. Add your first product!</p>';
+            // Set up filters
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.getAttribute('data-category');
+                    filterProducts(category);
+                    
+                    // Update active filter button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        });
+
+        // Show specific page
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active navigation link
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // If products page, render products
+            if (pageId === 'products') {
+                renderProducts();
+            }
+        }
+
+        // Filter products by category
+        function filterProducts(category) {
+            const productsGrid = document.getElementById('productGrid');
+            productsGrid.innerHTML = '';
+            
+            let filteredProducts = products;
+            if (category !== 'all') {
+                filteredProducts = products.filter(product => product.category === category);
+            }
+            
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = '<p>No products found in this category.</p>';
                 return;
             }
             
-            products.forEach(product => {
+            filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
@@ -772,50 +1060,29 @@
                         <h3>${product.name}</h3>
                         <p class="product-description">${product.description}</p>
                         <div class="price">${product.price.toFixed(2)}</div>
-                        <div class="product-actions">
-                            <button class="action-btn edit-btn" onclick="editProduct(${product.id})">Edit</button>
-                            <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
-                        </div>
                     </div>
                 `;
-                productGrid.appendChild(productCard);
+                productsGrid.appendChild(productCard);
             });
         }
 
-        // Reset form
-        function resetForm() {
-            document.getElementById('productName').value = '';
-            document.getElementById('productCategory').value = '';
-            document.getElementById('productDescription').value = '';
-            document.getElementById('productPrice').value = '';
-            productImage.value = '';
-            imageData.value = '';
-            imagePreview.src = '';
-            imagePreview.style.display = 'none';
+        // Set up image upload functionality
+        function setupImageUpload() {
+            // Click on upload area to trigger file input
+            imageUpload.addEventListener('click', () => {
+                productImageInput.click();
+            });
             
-            // Show upload text again
-            const uploadText = imageUpload.querySelector('p');
-            if (uploadText) uploadText.style.display = 'block';
-            const uploadIcon = imageUpload.querySelector('i');
-            if (uploadIcon) uploadIcon.style.display = 'block';
+            // Handle file selection
+            productImageInput.addEventListener('change', handleImageUpload);
             
-            editIdInput.value = '';
-            formTitle.textContent = 'Add New Product';
-        }
-
-        // Save to localStorage
-        function saveToLocalStorage() {
-            localStorage.setItem('techguard-products', JSON.stringify(products));
-        }
-
-        // Load from localStorage
-        function loadFromLocalStorage() {
-            const storedProducts = localStorage.getItem('techguard-products');
-            if (storedProducts) {
-                products = JSON.parse(storedProducts);
-                renderProducts();
-            }
-        }
-    </script>
-</body>
-</html>
+            // Drag and drop functionality
+            imageUpload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUpload.style.borderColor = '#3498db';
+                imageUpload.style.backgroundColor = '#f9f9f9';
+            });
+            
+            imageUpload.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                imageUpload.style.borderColor =
