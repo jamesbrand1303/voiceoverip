@@ -173,6 +173,30 @@
             border-color: var(--secondary);
         }
         
+        /* Image Upload */
+        .image-upload {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            border-color: var(--secondary);
+        }
+        
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            margin-top: 15px;
+            display: none;
+            border-radius: 5px;
+        }
+        
         /* Product Grid */
         .product-grid {
             display: grid;
@@ -383,10 +407,12 @@
             <!-- Product Form -->
             <div class="product-form" id="productForm">
                 <h3 id="formTitle">Add New Product</h3>
+                
                 <div class="form-group">
                     <label for="productName">Product Name</label>
                     <input type="text" id="productName" class="form-control" placeholder="Enter product name">
                 </div>
+                
                 <div class="form-group">
                     <label for="productCategory">Category</label>
                     <select id="productCategory" class="form-control">
@@ -396,18 +422,29 @@
                         <option value="Solar Solutions">Solar Solutions</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label for="productDescription">Description</label>
                     <textarea id="productDescription" class="form-control" rows="4" placeholder="Enter product description"></textarea>
                 </div>
+                
                 <div class="form-group">
-                    <label for="productPrice">Price ($)</label>
-                    <input type="number" id="productPrice" class="form-control" placeholder="Enter price" step="0.01">
+                    <label for="productPrice">Price (ZAR)</label>
+                    <input type="number" id="productPrice" class="form-control" placeholder="Enter price in Rands" step="0.01" min="0">
                 </div>
+                
                 <div class="form-group">
-                    <label for="productImage">Image URL</label>
-                    <input type="text" id="productImage" class="form-control" placeholder="Enter image URL">
+                    <label>Product Image</label>
+                    <div class="image-upload" id="imageUpload">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 40px; color: #ccc; margin-bottom: 10px;"></i>
+                        <p>Click to upload an image or drag and drop</p>
+                        <p style="font-size: 12px; color: #999;">PNG, JPG, GIF up to 5MB</p>
+                        <img id="imagePreview" class="image-preview" alt="Image preview">
+                    </div>
+                    <input type="file" id="productImage" accept="image/*" style="display: none;">
+                    <input type="hidden" id="imageData">
                 </div>
+                
                 <div class="form-group">
                     <button class="admin-btn btn-success" id="saveProduct">Save Product</button>
                     <button class="admin-btn btn-danger" id="cancelEdit">Cancel</button>
@@ -457,14 +494,14 @@
     </footer>
 
     <script>
-        // Sample product data
+        // Sample product data with ZAR prices
         let products = [
             {
                 id: 1,
                 name: "4K Security Camera",
                 category: "CCTV Security",
                 description: "Ultra HD outdoor security camera with night vision",
-                price: 199.99,
+                price: 3499.99,
                 image: "https://images.unsplash.com/photo-1546054457-75e0283f459f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
             },
             {
@@ -472,7 +509,7 @@
                 name: "Business VoIP Phone",
                 category: "VOIP Services",
                 description: "Professional VoIP phone with HD voice and multiple lines",
-                price: 129.99,
+                price: 2299.99,
                 image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
             },
             {
@@ -480,7 +517,7 @@
                 name: "Solar Panel Kit",
                 category: "Solar Solutions",
                 description: "300W complete solar panel kit for home use",
-                price: 499.99,
+                price: 8999.99,
                 image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
             }
         ];
@@ -494,12 +531,87 @@
         const saveAllBtn = document.getElementById('saveAll');
         const formTitle = document.getElementById('formTitle');
         const editIdInput = document.getElementById('editId');
+        const imageUpload = document.getElementById('imageUpload');
+        const productImage = document.getElementById('productImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const imageData = document.getElementById('imageData');
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             loadFromLocalStorage();
+            setupImageUpload();
         });
+
+        // Set up image upload functionality
+        function setupImageUpload() {
+            // Click on upload area to trigger file input
+            imageUpload.addEventListener('click', () => {
+                productImage.click();
+            });
+            
+            // Handle file selection
+            productImage.addEventListener('change', handleImageUpload);
+            
+            // Drag and drop functionality
+            imageUpload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUpload.style.borderColor = var(--secondary);
+                imageUpload.style.backgroundColor = '#f9f9f9';
+            });
+            
+            imageUpload.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                imageUpload.style.borderColor = '#ddd';
+                imageUpload.style.backgroundColor = 'transparent';
+            });
+            
+            imageUpload.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageUpload.style.borderColor = '#ddd';
+                imageUpload.style.backgroundColor = 'transparent';
+                
+                if (e.dataTransfer.files.length) {
+                    productImage.files = e.dataTransfer.files;
+                    handleImageUpload();
+                }
+            });
+        }
+        
+        // Handle image upload and preview
+        function handleImageUpload() {
+            const file = productImage.files[0];
+            
+            if (file) {
+                // Check if the file is an image
+                if (!file.type.match('image.*')) {
+                    alert('Please select an image file');
+                    return;
+                }
+                
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Image must be less than 5MB');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    imageData.value = e.target.result; // Store base64 data
+                    
+                    // Hide upload text when image is selected
+                    const uploadText = imageUpload.querySelector('p');
+                    if (uploadText) uploadText.style.display = 'none';
+                    const uploadIcon = imageUpload.querySelector('i');
+                    if (uploadIcon) uploadIcon.style.display = 'none';
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
 
         // Toggle product form
         toggleFormBtn.addEventListener('click', () => {
@@ -519,11 +631,11 @@
             const category = document.getElementById('productCategory').value;
             const description = document.getElementById('productDescription').value;
             const price = parseFloat(document.getElementById('productPrice').value);
-            const image = document.getElementById('productImage').value;
+            const image = imageData.value || document.getElementById('productImage').value;
             const editId = editIdInput.value;
 
-            if (!name || !category || !description || !price || !image) {
-                alert('Please fill in all fields');
+            if (!name || !category || !description || !price) {
+                alert('Please fill in all required fields');
                 return;
             }
 
@@ -549,7 +661,7 @@
                     category,
                     description,
                     price,
-                    image
+                    image: image || 'https://via.placeholder.com/300x200?text=No+Image'
                 });
             }
 
@@ -573,7 +685,28 @@
                 document.getElementById('productCategory').value = product.category;
                 document.getElementById('productDescription').value = product.description;
                 document.getElementById('productPrice').value = product.price;
-                document.getElementById('productImage').value = product.image;
+                
+                // Handle image
+                if (product.image.startsWith('data:image') || product.image.startsWith('blob:')) {
+                    imagePreview.src = product.image;
+                    imagePreview.style.display = 'block';
+                    imageData.value = product.image;
+                    // Hide upload text when image is selected
+                    const uploadText = imageUpload.querySelector('p');
+                    if (uploadText) uploadText.style.display = 'none';
+                    const uploadIcon = imageUpload.querySelector('i');
+                    if (uploadIcon) uploadIcon.style.display = 'none';
+                } else {
+                    imagePreview.src = product.image;
+                    imagePreview.style.display = 'block';
+                    imageData.value = '';
+                    // Hide upload text when image is selected
+                    const uploadText = imageUpload.querySelector('p');
+                    if (uploadText) uploadText.style.display = 'none';
+                    const uploadIcon = imageUpload.querySelector('i');
+                    if (uploadIcon) uploadIcon.style.display = 'none';
+                }
+                
                 editIdInput.value = product.id;
                 
                 formTitle.textContent = 'Edit Product';
@@ -589,6 +722,11 @@
                 renderProducts();
                 saveToLocalStorage();
             }
+        }
+
+        // Format price as South African Rand
+        function formatPrice(price) {
+            return 'R ' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
         }
 
         // Render products
@@ -611,7 +749,7 @@
                         <span class="product-category">${product.category}</span>
                         <h3>${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="price">$${product.price.toFixed(2)}</div>
+                        <div class="price">${formatPrice(product.price)}</div>
                         <div class="product-actions">
                             <button class="action-btn edit-btn" onclick="editProduct(${product.id})">Edit</button>
                             <button class="action-btn delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
@@ -628,7 +766,17 @@
             document.getElementById('productCategory').value = '';
             document.getElementById('productDescription').value = '';
             document.getElementById('productPrice').value = '';
-            document.getElementById('productImage').value = '';
+            productImage.value = '';
+            imageData.value = '';
+            imagePreview.src = '';
+            imagePreview.style.display = 'none';
+            
+            // Show upload text again
+            const uploadText = imageUpload.querySelector('p');
+            if (uploadText) uploadText.style.display = 'block';
+            const uploadIcon = imageUpload.querySelector('i');
+            if (uploadIcon) uploadIcon.style.display = 'block';
+            
             editIdInput.value = '';
             formTitle.textContent = 'Add New Product';
         }
